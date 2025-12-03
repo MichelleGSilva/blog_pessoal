@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPip
 import { PostagemService } from "../services/postagem.service";
 import { Postagem } from "../entities/postagem.entity";
 import { ReturnDocument } from "typeorm";
+import { DeleteResult } from "typeorm/browser";
 
 @Controller("/postagens") // Indica que a classe e uma controller
 export class PostagemController {
@@ -30,7 +31,7 @@ export class PostagemController {
     }
 
     @Post()
-    @HttpCode(HttpStatus.CREATED) // resposta padrão será o código de status HTTP create
+    @HttpCode(HttpStatus.CREATED) // resposta padrão será o código de status HTTP create 201
     create(@Body() postagem: Postagem): Promise<Postagem> {
       return this.postagemService.create(postagem);
     }
@@ -43,7 +44,7 @@ export class PostagemController {
 
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT) // resposta padrão o HTTP Status NO_CONTENT 🡪 204
-    delete(@Param('id', ParseIntPipe) id: number) {
+    delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
         return this.postagemService.delete(id); // retorna confirmação da exclusão do Objeto da Classe Postagem
     }
     
