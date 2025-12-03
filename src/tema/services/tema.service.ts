@@ -25,7 +25,7 @@ export class TemaService {
                 id
             },
             relations: {
-                postagem: true
+                postagem: true // “Ao buscar esse registro, traga também todas as postagens relacionadas.”
             }
         });
 
